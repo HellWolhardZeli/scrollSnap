@@ -143,8 +143,8 @@ function checkKey(e) {
 
 
 var timeout;
-var snapTop = 0.5;
-var snapBtm = 1 - snapTop;
+var snapTop = 0.7;
+var snapBtm = 0.7;
 
 
 
