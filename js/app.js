@@ -50,59 +50,59 @@ function smoothScroll(stopY) {
 //
 //
 
-document.querySelector("#swipezone").addEventListener("touchstart", startTouch, false);
-document.querySelector("#swipezone").addEventListener("touchmove", moveTouch, false);
+// document.querySelector("#swipezone").addEventListener("touchstart", startTouch, false);
+// document.querySelector("#swipezone").addEventListener("touchmove", moveTouch, false);
 
-// Swipe Up / Down / Left / Right
-var initialX = null;
-var initialY = null;
+// // Swipe Up / Down / Left / Right
+// var initialX = null;
+// var initialY = null;
 
-function startTouch(e) {
-    initialX = e.touches[0].clientX;
-    initialY = e.touches[0].clientY;
-    mobile = true;
-};
+// function startTouch(e) {
+//     initialX = e.touches[0].clientX;
+//     initialY = e.touches[0].clientY;
+//     mobile = true;
+// };
 
-function moveTouch(e) {
-    if (initialX === null) {
-        return;
-    }
+// function moveTouch(e) {
+//     if (initialX === null) {
+//         return;
+//     }
 
-    if (initialY === null) {
-        return;
-    }
+//     if (initialY === null) {
+//         return;
+//     }
 
-    var currentX = e.touches[0].clientX;
-    var currentY = e.touches[0].clientY;
+//     var currentX = e.touches[0].clientX;
+//     var currentY = e.touches[0].clientY;
 
-    var diffX = initialX - currentX;
-    var diffY = initialY - currentY;
+//     var diffX = initialX - currentX;
+//     var diffY = initialY - currentY;
 
-    if (Math.abs(diffX) > Math.abs(diffY)) {
-        // sliding horizontally
-        if (diffX > 0) {
-            // swdocument.querySelector("#swipezone") 
-            console.log("swiped left");
-        } else {
-            // swiped right
-            console.log("swiped right");
-        }
-    } else {
-        // sliding vertically
-        if (diffY > 0) {
-            // swiped up
-            console.log("swiped up");
-        } else {
-            // swiped down
-            console.log("swiped down");
-        }
-    }
+//     if (Math.abs(diffX) > Math.abs(diffY)) {
+//         // sliding horizontally
+//         if (diffX > 0) {
+//             // swdocument.querySelector("#swipezone") 
+//             console.log("swiped left");
+//         } else {
+//             // swiped right
+//             console.log("swiped right");
+//         }
+//     } else {
+//         // sliding vertically
+//         if (diffY > 0) {
+//             // swiped up
+//             console.log("swiped up");
+//         } else {
+//             // swiped down
+//             console.log("swiped down");
+//         }
+//     }
 
-    initialX = null;
-    initialY = null;
+//     initialX = null;
+//     initialY = null;
 
-    e.preventDefault();
-};
+//     e.preventDefault();
+// };
 
 
 
