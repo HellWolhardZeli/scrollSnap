@@ -15,12 +15,12 @@ function smoothScroll(stopY) {
 
 
     var distance = stopY > startY ? stopY - startY : startY - stopY;
-    if (distance < 100) {
+    if (distance < 10) {
         scrollTo(0, stopY);
         return;
     }
-    var speed = Math.round(distance / 100);
-    if (speed >= 20) speed = 20;
+    var speed = Math.round(distance / 70);
+    if (speed >= 30) speed = 20;
     var step = Math.round(distance / 25);
     var leapY = stopY > startY ? startY + step : startY - step;
     var timer = 0;
@@ -29,7 +29,7 @@ function smoothScroll(stopY) {
             setTimeout("window.scrollTo(0, " + leapY + ")", timer * speed);
             leapY += step;
             if (leapY > stopY) leapY = stopY;
-            timer++;
+            timer += 0.7;
         }
         return;
     }
@@ -37,7 +37,7 @@ function smoothScroll(stopY) {
         setTimeout("window.scrollTo(0, " + leapY + ")", timer * speed);
         leapY -= step;
         if (leapY < stopY) leapY = stopY;
-        timer++;
+        timer += 0.7;
     }
 }
 
@@ -78,6 +78,12 @@ function smoothScroll(stopY) {
 //     var diffX = initialX - currentX;
 //     var diffY = initialY - currentY;
 
+//     var wndwHeight = window.innerHeight;
+//     var crntScrl = window.pageYOffset || document.documentElement.scrollTop;
+//     var scrlAmnt = (crntScrl % wndwHeight) / wndwHeight; // gives the percentage of scroll within the window
+//     var crntScrn = Math.floor(crntScrl / wndwHeight); // Gives the number of the current screen
+
+
 //     if (Math.abs(diffX) > Math.abs(diffY)) {
 //         // sliding horizontally
 //         if (diffX > 0) {
@@ -91,10 +97,14 @@ function smoothScroll(stopY) {
 //         // sliding vertically
 //         if (diffY > 0) {
 //             // swiped up
-//             console.log("swiped up");
+//             var scrlTo = wndwHeight * (crntScrn + 1);
+//             // console.log("scrollto " + scrlTo);
+//             smoothScroll(scrlTo);
 //         } else {
 //             // swiped down
-//             console.log("swiped down");
+//             var scrlTo = wndwHeight * (crntScrn - 1);
+//             // console.log("scrollto " + scrlTo);
+//             smoothScroll(scrlTo);
 //         }
 //     }
 
@@ -142,7 +152,7 @@ window.onscroll = function (ev) {
     clearTimeout(timeout);
     timeout = setTimeout(function () {
         snapScroll();
-    }, 60);
+    }, 50);
 };
 
 function snapScroll() {
