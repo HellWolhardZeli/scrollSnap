@@ -1,12 +1,27 @@
 @import 'https://fonts.googleapis.com/css?family=Lato:100';
 
 body::-webkit-scrollbar {
-    width: 0 !important
+    width: 0;
 }
 
 body {
-    overflow: -moz-scrollbars-none;
+    overflow: hidden;
 
+}
+
+.pagination a {
+    color: blue;
+    float: right;
+    text-decoration: none;
+    transition: background-Color .3s;
+}
+
+.pagination a.active {
+    background-color: brown;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: goldenrod;
 }
 
 * {
@@ -33,7 +48,6 @@ p {
     text-align: center;
     font-size: 10vh;
     line-height: 10vh;
-    padding-top: 45vh;
 }
 
 #swipezone {

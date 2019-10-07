@@ -1,4 +1,4 @@
 {
-    "liveServer.settings.port": 5502,
-    "liveServer.settings.host": "172.22.100.162"
+    "liveServer.settings.port": 3000,
+    "liveServer.settings.host": "192.168.1.33"
 }

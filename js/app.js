@@ -1,26 +1,121 @@
-// var sections = document.querySelectorAll(".container");
+var container = document.querySelectorAll(".container");
+var current = 0;
 
 
-// for (var i = 0; i < sections.length; i++) {
-//     console.log(sections[i]);
+var delayInAddRemove = 500; //do not touch
+// window.onload() = function () {
+//     var container = document.querySelectorAll(".container");
+
 // }
 
 
-//scrollTo of javaScript but with custom animations
+// function snapScroll() {
+//     // get scrollheight
+//     var wndwHeight = window.innerHeight;
+//     var crntScrl = window.pageYOffset || document.documentElement.scrollTop;
+//     var scrlAmnt = (crntScrl % wndwHeight) / wndwHeight; // gives the percentage of scroll within the window
+//     var crntScrn = Math.floor(crntScrl / wndwHeight); // Gives the number of the current screen
 
-var mobile = false;
+//     if (scrlAmnt <= snapTop) {
+//         var scrlTo = wndwHeight * crntScrn;
+//         smoothScroll(scrlTo);
+//     } else if (scrlAmnt >= snapBtm) {
+//         var scrlTo = wndwHeight * (crntScrn + 1);
+//         smoothScroll(1300);
+//     }
+// }
 
-function smoothScroll(stopY) {
-    var startY = window.pageYOffset || document.documentElement.scrollTop;
+
+// function currentYPosition() {
+//     // Firefox, Chrome, Opera, Safari
+//     if (self.pageYOffset) return self.pageYOffset;
+//     // Internet Explorer 6 - standards mode
+//     if (document.documentElement && document.documentElement.scrollTop)
+//         return document.documentElement.scrollTop;
+//     // Internet Explorer 6, 7 and 8
+//     if (document.body.scrollTop) return document.body.scrollTop;
+//     return 0;
+// }
+
+// function elmYPosition(eID) {
+//     var elm = document.getElementById(eID);
+//     var y = elm.offsetTop;
+//     var node = elm;
+//     while (node.offsetParent && node.offsetParent != document.body) {
+//         node = node.offsetParent;
+//         y += node.offsetTop;
+//     }
+//     return y;
+// }
+
+// function smoothScroll(eID) {
+//     var startY = currentYPosition();
+//     var stopY = elmYPosition(eID);
+//     var distance = stopY > startY ? stopY - startY : startY - stopY;
+//     if (distance < 100) {
+//         scrollTo(0, stopY);
+//         return;
+//     }
+//     var speed = Math.round(distance / 100);
+//     if (speed >= 20) speed = 20;
+//     var step = Math.round(distance / 25);
+//     var leapY = stopY > startY ? startY + step : startY - step;
+//     var timer = 0;
+//     if (stopY > startY) {
+//         for (var i = startY; i < stopY; i += step) {
+//             setTimeout("window.scrollTo(0, " + leapY + ")", timer * speed);
+//             leapY += step;
+//             if (leapY > stopY) leapY = stopY;
+//             timer++;
+//         }
+//         return;
+//     }
+//     for (var i = startY; i > stopY; i -= step) {
+//         setTimeout("window.scrollTo(0, " + leapY + ")", timer * speed);
+//         leapY -= step;
+//         if (leapY < stopY) leapY = stopY;
+//         timer++;
+//     }
+//     return false;
+// }
 
 
+
+
+function currentYPosition() {
+    // Firefox, Chrome, Opera, Safari
+    if (self.pageYOffset) return self.pageYOffset;
+    // Internet Explorer 6 - standards mode
+    if (document.documentElement && document.documentElement.scrollTop)
+        return document.documentElement.scrollTop;
+    // Internet Explorer 6, 7 and 8
+    if (document.body.scrollTop) return document.body.scrollTop;
+    return 0;
+}
+
+//elm is element, query is selected already
+
+function elmYPosition(elm) {
+
+    var y = elm.offsetTop;
+    var node = elm;
+    while (node.offsetParent && node.offsetParent != document.body) {
+        node = node.offsetParent;
+        y += node.offsetTop;
+    }
+    return y;
+}
+
+function smoothScroll(eID) {
+    var startY = currentYPosition();
+    var stopY = elmYPosition(eID);
     var distance = stopY > startY ? stopY - startY : startY - stopY;
-    if (distance < 10) {
+    if (distance < 100) {
         scrollTo(0, stopY);
         return;
     }
-    var speed = Math.round(distance / 70);
-    if (speed >= 30) speed = 20;
+    var speed = Math.round(distance / 100);
+    if (speed >= 20) speed = 20;
     var step = Math.round(distance / 25);
     var leapY = stopY > startY ? startY + step : startY - step;
     var timer = 0;
@@ -29,26 +124,59 @@ function smoothScroll(stopY) {
             setTimeout("window.scrollTo(0, " + leapY + ")", timer * speed);
             leapY += step;
             if (leapY > stopY) leapY = stopY;
-            timer += 0.7;
+            timer++;
         }
+        // window.addEventListener('wheel', scroll);
         return;
     }
     for (var i = startY; i > stopY; i -= step) {
         setTimeout("window.scrollTo(0, " + leapY + ")", timer * speed);
         leapY -= step;
         if (leapY < stopY) leapY = stopY;
-        timer += 0.7;
+        timer++;
     }
+    // window.addEventListener('wheel', scroll);
+    return false;
 }
 
 
 
-//
-//
-//
-//
-//
-//
+
+
+
+
+// function smoothScroll(stopY) {
+//     var startY = window.pageYOffset || document.documentElement.scrollTop;
+
+
+//     var distance = stopY > startY ? stopY - startY : startY - stopY;
+//     if (distance < 10) {
+//         scrollTo(0, stopY);
+//         return;
+//     }
+//     var speed = Math.round(distance / 70);
+//     if (speed >= 30) speed = 20;
+//     var step = Math.round(distance / 25);
+//     var leapY = stopY > startY ? startY + step : startY - step;
+//     var timer = 0;
+//     if (stopY > startY) {
+//         for (var i = startY; i < stopY; i += step) {
+//             setTimeout("window.scrollTo(0, " + leapY + ")", timer * speed);
+//             leapY += step;
+//             if (leapY > stopY) leapY = stopY;
+//             timer += 0.7;
+//         }
+//         return;
+//     }
+//     for (var i = startY; i > stopY; i -= step) {
+//         setTimeout("window.scrollTo(0, " + leapY + ")", timer * speed);
+//         leapY -= step;
+//         if (leapY < stopY) leapY = stopY;
+//         timer += 0.7;
+//     }
+// }
+
+
 
 // document.querySelector("#swipezone").addEventListener("touchstart", startTouch, false);
 // document.querySelector("#swipezone").addEventListener("touchmove", moveTouch, false);
@@ -114,59 +242,161 @@ function smoothScroll(stopY) {
 //     e.preventDefault();
 // };
 
+var enablekeyboard = true;
 
+window.onkeydown = checkKey;
 
-document.onkeydown = checkKey;
 
 function checkKey(e) {
 
 
     e = e || window.event;
-    var wndwHeight = window.innerHeight;
-    var crntScrl = window.pageYOffset || document.documentElement.scrollTop;
-    var scrlAmnt = (crntScrl % wndwHeight) / wndwHeight; // gives the percentage of scroll within the window
-    var crntScrn = Math.floor(crntScrl / wndwHeight); // Gives the number of the current screen
 
 
-    if (e.keyCode == '38') {
-        var scrlTo = wndwHeight * (crntScrn - 1);
-        // console.log("scrollto " + scrlTo);
-        smoothScroll(scrlTo);
-    } else if (e.keyCode == '40') {
-        var scrlTo = wndwHeight * (crntScrn + 1);
-        // console.log("scrollto " + scrlTo);
-        smoothScroll(scrlTo);
+    if (enablekeyboard) {
+        enablekeyboard = false;
+        setTimeout(function () {
+            this.enablekeyboard = true;
+        }, delayInAddRemove);
+        if (e.keyCode == '38') {
+
+
+
+            if (current != 0) {
+                current--;
+                smoothScroll(container[current]);
+            }
+        } else if (e.keyCode == '40') {
+
+
+            // snapScroll();
+            if (current == container.length) {
+                current = 0;
+            } else {
+                current++;
+            }
+
+            smoothScroll(container[current]);
+        }
     }
 
 }
 
 
 
-var timeout;
-var snapTop = 0.7;
-var snapBtm = 0.7;
+
+//not required vars
+// var timeout;
+// var snapTop = 0.7;
+// var snapBtm = 0.7;
+
+// var enable = true;
+// if (enable) {
 
 
 
-window.onscroll = function (ev) {
-    clearTimeout(timeout);
-    timeout = setTimeout(function () {
-        snapScroll();
-    }, 50);
+
+function scroll(event) {
+
+
+    this.console.log(event.deltaY);
+
+
+    if (event.deltaY < -50) {
+        // event.preventDefault();
+        // snapScroll();
+
+        window.removeEventListener('wheel', scroll);
+        setTimeout(addlistener, delayInAddRemove);
+
+
+        if (current != 0) {
+            current--;
+            smoothScroll(container[current]);
+        }
+
+
+    } else if (event.deltaY > 50) {
+        // event.preventDefault();
+        window.removeEventListener('wheel', scroll);
+        setTimeout(addlistener, delayInAddRemove);
+
+        // snapScroll();
+        if (current == container.length) {
+            current = 0;
+        } else {
+            current++;
+        }
+
+        smoothScroll(container[current]);
+    }
+
+}
+
+function addlistener() {
+    console.log("added");
+    window.addEventListener('wheel', scroll);
+}
+
+function touch(event) {
+    console.log(event.touches[0].screenX);
+}
+
+// window.addEventListener('touchmove', touch);
+window.addEventListener('wheel', scroll);
+
+
+document.addEventListener('touchstart', handleTouchStart, false);
+document.addEventListener('touchmove', handleTouchMove, false);
+
+
+var yDown = null;
+
+function getTouches(evt) {
+    return evt.touches ||
+        evt.originalEvent.touches;
+}
+
+function handleTouchStart(evt) {
+    const firstTouch = getTouches(evt)[0];
+
+    yDown = firstTouch.clientY;
 };
 
-function snapScroll() {
-    // get scrollheight
-    var wndwHeight = window.innerHeight;
-    var crntScrl = window.pageYOffset || document.documentElement.scrollTop;
-    var scrlAmnt = (crntScrl % wndwHeight) / wndwHeight; // gives the percentage of scroll within the window
-    var crntScrn = Math.floor(crntScrl / wndwHeight); // Gives the number of the current screen
-
-    if (scrlAmnt <= snapTop) {
-        var scrlTo = wndwHeight * crntScrn;
-        smoothScroll(scrlTo);
-    } else if (scrlAmnt >= snapBtm) {
-        var scrlTo = wndwHeight * (crntScrn + 1);
-        smoothScroll(scrlTo);
+function handleTouchMove(evt) {
+    if (!yDown) {
+        return;
     }
-}
+
+
+    var yUp = evt.touches[0].clientY;
+
+
+    var yDiff = yDown - yUp;
+
+
+    if (yDiff > 0) {
+        /* up swipe */
+        console.log("up");
+        if (current == container.length) {
+            current = 0;
+        } else {
+            current++;
+        }
+
+        smoothScroll(container[current]);
+    } else {
+        /* down swipe */
+        console.log("down");
+        if (current != 0) {
+            current--;
+            smoothScroll(container[current]);
+        }
+    }
+
+
+
+    yDown = null;
+};
+
+// }
