@@ -1,5 +1,9 @@
 @import 'https://fonts.googleapis.com/css?family=Lato:100';
 
+html {
+    scroll-behavior: smooth;
+}
+
 body::-webkit-scrollbar {
     width: 0;
 }

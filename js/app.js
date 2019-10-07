@@ -2,11 +2,42 @@ var container = document.querySelectorAll(".container");
 var current = 0;
 
 
-var delayInAddRemove = 500; //do not touch
+
+var browser = (function () {
+    var test = function (regexp) {
+        return regexp.test(window.navigator.userAgent);
+    }
+    switch (true) {
+        case test(/edge/i):
+            return "edge";
+        case test(/opr/i) && (!!window.opr || !!window.opera):
+            return "opera";
+        case test(/chrome/i) && !!window.chrome:
+            return "chrome";
+        case test(/trident/i):
+            return "ie";
+        case test(/firefox/i):
+            return "firefox";
+        case test(/safari/i):
+            return "safari";
+        default:
+            return "other";
+    }
+})();
+var triggerdelta = 60;
+
+if (browser == "firefox") {
+    triggerdelta = 0.5;
+};
+
+
+
+var delayInAddRemove = 800; //do not touch
 // window.onload() = function () {
 //     var container = document.querySelectorAll(".container");
 
 // }
+
 
 
 // function snapScroll() {
@@ -248,6 +279,8 @@ window.onkeydown = checkKey;
 
 
 function checkKey(e) {
+    // document.body.requestFullscreen();
+
 
 
     e = e || window.event;
@@ -285,6 +318,8 @@ function checkKey(e) {
 
 
 
+
+
 //not required vars
 // var timeout;
 // var snapTop = 0.7;
@@ -297,12 +332,13 @@ function checkKey(e) {
 
 
 function scroll(event) {
+    // document.body.requestFullscreen();
 
 
-    this.console.log(event.deltaY);
 
 
-    if (event.deltaY < -50) {
+
+    if (event.deltaY < -1 * triggerdelta) {
         // event.preventDefault();
         // snapScroll();
 
@@ -316,7 +352,7 @@ function scroll(event) {
         }
 
 
-    } else if (event.deltaY > 50) {
+    } else if (event.deltaY > triggerdelta) {
         // event.preventDefault();
         window.removeEventListener('wheel', scroll);
         setTimeout(addlistener, delayInAddRemove);
@@ -333,6 +369,11 @@ function scroll(event) {
 
 }
 
+
+window.addEventListener('wheel', scroll);
+
+
+
 function addlistener() {
     console.log("added");
     window.addEventListener('wheel', scroll);
@@ -340,10 +381,11 @@ function addlistener() {
 
 function touch(event) {
     console.log(event.touches[0].screenX);
+    // document.body.requestFullscreen();
 }
 
 // window.addEventListener('touchmove', touch);
-window.addEventListener('wheel', scroll);
+
 
 
 document.addEventListener('touchstart', handleTouchStart, false);
@@ -385,6 +427,9 @@ function handleTouchMove(evt) {
         }
 
         smoothScroll(container[current]);
+
+
+
     } else {
         /* down swipe */
         console.log("down");
