@@ -17,20 +17,7 @@ body {
 
 }
 
-.pagination a {
-    color: blue;
-    float: right;
-    text-decoration: none;
-    transition: background-Color .3s;
-}
 
-.pagination a.active {
-    background-color: brown;
-}
-
-.pagination a:hover:not(.active) {
-    background-color: goldenrod;
-}
 
 * {
     padding: 0;
@@ -49,22 +36,4 @@ body {
 
 .container:nth-child(odd) {
     background-color: #ED8D75;
-}
-
-p {
-    color: #fefefe;
-    text-align: center;
-    font-size: 10vh;
-    line-height: 10vh;
-}
-
-#swipezone {
-    width: 100%;
-    height: 100vh;
-    font-size: 5vw;
-    font-family: 'Comfortaa', cursive;
-    text-transform: uppercase;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
